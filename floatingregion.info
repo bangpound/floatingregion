@@ -1,0 +1,7 @@
+; $Id$
+name = Floating Region
+core = 6.x
+dependencies[] = jq
+dependencies[] = jquery_ui
+dependencies[] = jquery_plugin
+dependencies[] = hoverintent

@@ -1,0 +1,38 @@
+<?php
+// $Id: floatingregion.module 1640 2009-12-26 02:42:26Z bangpound $
+
+/**
+ * @file
+ */
+
+/**
+ * Implementation of hook_system_info_alter().
+ */
+function floatingregion_system_info_alter(&$info, $file) {
+  if (preg_match('/themes\//i', dirname($file->filename))) {
+    $info['regions']['floatingregion'] = t('Floating');
+  }
+}
+
+/**
+ * Implementation of hook_preprocess_block()
+ */
+function floatingregion_preprocess_block(&$variables, $hook = 'block') {
+  static $scripts_added;
+  $block = $variables['block'];
+  if (!$scripts_added && !empty($block->region) && $block->region == 'floatingregion') {
+    jquery_ui_add(array('ui.accordion', 'ui.resizable'));
+    jq_add('cookie');
+    jq_add('hoverIntent');
+    drupal_add_js(drupal_get_path('module', 'floatingregion') .'/floatingregion.js', 'module');
+    $scripts_added = TRUE;
+  }
+}
+
+/**
+ * Implementation of hook_preprocess_page()
+ */
+function floatingregion_preprocess_page(&$variables, $hook = 'page') {
+  $variables['closure'] .= '<div id="floating-region">'. $variables['floatingregion'] .'</div>';
+  unset($variables['floatingregion']);
+}

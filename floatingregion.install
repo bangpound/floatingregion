@@ -1,0 +1,20 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ */
+
+/**
+ * Implementation of hook_install()
+ */
+function floatingregion_install() {
+
+}
+
+/**
+ * Implementation of hook_uninstall()
+ */
+function floatingregion_uninstall() {
+
+}
